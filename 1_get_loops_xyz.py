@@ -32,15 +32,15 @@ class Protein():
 
     def format_coords(self, coords):
         str_coords = []
-        for i,x,y,z in coords:
-            str_coords.append('{:d} {:.2f} {:.2f} {:.2f}'.format(i,x,y,z))
+        for x,y,z in coords:
+        #for i,x,y,z in coords:
+            #str_coords.append('{:d} {:.2f} {:.2f} {:.2f}'.format(i,x,y,z))
+            str_coords.append('{:.2f} {:.2f} {:.2f}'.format(x,y,z))
         return '\n'.join(str_coords)
 
     def topol_loops_single(self):
         constituent_knots = {}
-        aaaa = self.topol_default_loop()
-        print(aaaa)
-        t0, t0_dir, t0_mass = aaaa
+        t0, t0_dir, t0_mass = self.topol_default_loop()
         with open('topology.txt', 'a+') as f:
             f.write('Whole chain: probabilistic {}; direct {}; mass_center {}\n'.format(t0, t0_dir, t0_mass))
             f.write('=====================\n')
