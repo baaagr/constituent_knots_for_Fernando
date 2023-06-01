@@ -43,7 +43,7 @@ class Protein():
         t0, t0_dir, t0_mass = self.topol_default_loop()
         with open('topology.txt', 'a+') as f:
             f.write('Whole chain: probabilistic {}; direct {}; mass_center {}\n'.format(t0, t0_dir, t0_mass))
-            f.write('=====================\n')
+            f.write('---------------------\n')
         constituent_knots['default'] = t0
         for bridge in self.bridges:
             print('\rPDB:{}, bridge:{:d}-{:d}'.format(self.name,bridge[0],bridge[1]),end='')
@@ -57,12 +57,12 @@ class Protein():
                 f.write('  Shorter loop {:d}-{:d}: probabilistic {}; direct {}; mass_center {}\n'.format(bridge[0], bridge[1], t_sh, t_sh_dir, t_sh_mass))
             constituent_knots['sh_{:d}-{:d}'.format(bridge[0],bridge[1])] = t_sh
             with open('topology.txt', 'a+') as f:
-                f.write('=====================\n')
-        print(constituent_knots)
+                f.write('---------------------\n')
+        #print(constituent_knots)
         return constituent_knots
 
     def topol_loops_double(self):
-        print(self.bridges)
+        #print(self.bridges)
         constituent_knots = {}
         for i,bridge1 in enumerate(self.bridges[:-1]):
             for j,bridge2 in enumerate(self.bridges[i+1:]):
@@ -97,7 +97,7 @@ class Protein():
                     f.write('  Shorter loop {:d}-{:d}_{:d}-{:d}: direct {}\n'.format(bridge1[0], bridge1[1], bridge2[0], bridge2[1], t_sh))
                     f.write('  Internal loop 1 {:d}-{:d}: direct {}\n'.format(bridge1[0], bridge1[1], t_in1))
                     f.write('  Internal loop 2 {:d}-{:d}: direct {}\n'.format(bridge2[0], bridge2[1], t_in2))
-                    f.write('=====================\n')
+                    f.write('---------------------\n')
                 constituent_knots['in1_{:d}-{:d}'.format(bridge1[0],bridge1[1])] = t_in1
                 constituent_knots['in2_{:d}-{:d}'.format(bridge2[0],bridge2[1])] = t_in2
                 constituent_knots['sh_{:d}-{:d}_{:d}-{:d}'.format(bridge1[0],bridge1[1],bridge2[0],bridge2[1])] = t_sh
